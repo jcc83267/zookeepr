@@ -7,7 +7,7 @@ const app = express();
 
 const { animals } = require('./data/animals.json');
 
-//function to filter
+//functions starts 
 function filterByQuery(query, animalsArray) {
     // let personalityTraitsArray = [];
     let filteredResults = animalsArray;
@@ -39,9 +39,15 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 }
 
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
+//functions end
 
 
-//to route?
+//to route start
 app.get('/api/animals', (req, res) => {
     let results = animals;
     if (req.query) {
@@ -49,6 +55,16 @@ app.get('/api/animals', (req, res) => {
     }
     res.json(results);
 });
+
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+      res.json(result);
+    } else {
+      res.send(404);
+    }
+});
+//to route end
 
 //to listen must be at the end???
 app.listen(PORT, () => {
