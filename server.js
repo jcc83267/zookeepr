@@ -1,13 +1,13 @@
 const express = require('express');
-
-const PORT = process.env.PORT || 3001;
-//used to initialize api server?
-const app = express();
 const { animals } = require('./data/animals.json');
 
+//used to initialize api server?
+const PORT = process.env.PORT || 3001;
+const app = express();
 
 //function to filter
 function filterByQuery(query, animalsArray) {
+    let personalityTraitsArray = [];
     let filteredResults = animalsArray;
     if (query.personalityTraits) {
         // Save personalityTraits as a dedicated array.
@@ -46,7 +46,6 @@ app.get('/api/animals', (req, res) => {
         results = filterByQuery(req.query, results);
     }
     res.json(results);
-
 });
 
 //to listen must be at the end???
