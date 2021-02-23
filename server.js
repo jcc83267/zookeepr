@@ -1,10 +1,11 @@
 const express = require('express');
-const { animals } = require('./data/animals.json');
+
 
 //used to initialize api server?
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+const { animals } = require('./data/animals.json');
 //function to filter
 function filterByQuery(query, animalsArray) {
     let personalityTraitsArray = [];
